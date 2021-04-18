@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 791995305552038399}
   - component: {fileID: 1559476542352493574}
   m_Layer: 0
-  m_Name: VR Rig Prefab
+  m_Name: Network Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
