@@ -16,6 +16,9 @@ public class NetworkPlayer : MonoBehaviour
     private Transform leftHandRig;
     private Transform rightHandRig;
 
+    public Animator leftHandAnimator;
+    public Animator rightHandAnimator;
+
     private PhotonView photonView;
     // Start is called before the first frame update
     void Start()
@@ -40,7 +43,11 @@ public class NetworkPlayer : MonoBehaviour
             MapPosition(head, headRig);
             MapPosition(leftHand, leftHandRig);
             MapPosition(rightHand, rightHandRig);
+
+            UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.LeftHand), leftHandAnimator);
+            UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.RightHand), rightHandAnimator);
         }
+
     }
 
     void MapPosition(Transform target, Transform rigTransform)
@@ -48,5 +55,27 @@ public class NetworkPlayer : MonoBehaviour
 
         target.position = rigTransform.position;
         target.rotation = rigTransform.rotation;
+    }
+
+    private void UpdateHandAnimation(InputDevice targetDevice, Animator handAnimator)
+    {
+        if (targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue))
+        {
+
+            handAnimator.SetFloat("Trigger", triggerValue);
+        }
+        else
+        {
+            handAnimator.SetFloat("Trigger", 0);
+        }
+
+        if (targetDevice.TryGetFeatureValue(CommonUsages.grip, out float GripValue))
+        {
+            handAnimator.SetFloat("Grip", GripValue);
+        }
+        else
+        {
+            handAnimator.SetFloat("Grip", 0);
+        }
     }
 }
