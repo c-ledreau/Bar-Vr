@@ -23,12 +23,19 @@ public class NetworkPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         photonView = GetComponent<PhotonView>();
         XRRig rig = FindObjectOfType<XRRig>();
         headRig = rig.transform.Find("Camera Offset/Main Camera");
         leftHandRig = rig.transform.Find("Camera Offset/LeftHand Controller");
         rightHandRig = rig.transform.Find("Camera Offset/RightHand Controller");
+
+        if (photonView.IsMine)
+        {
+            foreach (var item in GetComponentsInChildren<Renderer>())
+            {
+                item.enabled = false;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -36,9 +43,7 @@ public class NetworkPlayer : MonoBehaviour
     {
         if (photonView.IsMine)
         {
-            rightHand.gameObject.SetActive(false);
-            leftHand.gameObject.SetActive(false);
-            head.gameObject.SetActive(false);
+
 
             MapPosition(head, headRig);
             MapPosition(leftHand, leftHandRig);
