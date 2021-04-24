@@ -3,18 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using Photon.Pun;
-
+using UnityEngine.XR.Interaction.Toolkit; 
+    
+    
 public class NetworkPlayer : MonoBehaviour
 {
     public Transform head;
     public Transform leftHand;
     public Transform rightHand;
 
+    private Transform headRig;
+    private Transform leftHandRig;
+    private Transform rightHandRig;
+    
     private PhotonView photonView;
     // Start is called before the first frame update
     void Start()
     {
+
         photonView = GetComponent<PhotonView>();
+        XRRig rig = FindObjectOfType<XRRig>();
+        headRig = rig.transform.Find("Camera Offset/VR Camera");
+        leftHandRig = rig.transform.Find("Camera Offset/Left Hand");
+        rightHandRig = rig.transform.Find("Camera Offset/right Hand");
     }
 
     // Update is called once per frame
