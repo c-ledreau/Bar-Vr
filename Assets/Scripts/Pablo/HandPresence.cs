@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,10 +45,11 @@ public class HandPresence : MonoBehaviour
         {
             UpdateHandAnimation();
         }*/
+
         UpdateHandAnimation();
     }
 
-    private void UpdateHandAnimation()
+    public void UpdateHandAnimation()
     {
         if (targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue))
         {
