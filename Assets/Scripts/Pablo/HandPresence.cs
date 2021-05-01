@@ -56,7 +56,7 @@ public class HandPresence : MonoBehaviour
 
             HandAnimator.SetFloat("Trigger", triggerValue);
         }
-        else
+        else 
         {
             //HandAnimator.SetFloat("Trigger", 0);
         }
